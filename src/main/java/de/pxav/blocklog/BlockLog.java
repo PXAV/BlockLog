@@ -20,7 +20,10 @@ public class BlockLog extends JavaPlugin {
     SimpleBinderModule simpleBinderModule = SimpleBinderModule.create(this);
     injector = Guice.createInjector(simpleBinderModule);
 
-
+    CredentialsFile credentialsFile = injector.getInstance(CredentialsFile.class);
+    credentialsFile.createFile("plugins//BlockLog", "databaseCredentials.yml");
+    credentialsFile.writeDefaults();
+    credentialsFile.loadToCache();
 
   }
 
