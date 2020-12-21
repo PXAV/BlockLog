@@ -30,6 +30,8 @@ public class SessionItem {
   @Convert(converter = MaterialConverter.class)
   private Material material;
 
+  private int amount;
+
   @Convert(converter = ItemDirectionConverter.class)
   private ItemDirection itemDirection;
 
