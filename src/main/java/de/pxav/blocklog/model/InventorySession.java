@@ -1,12 +1,15 @@
 package de.pxav.blocklog.model;
 
+import de.pxav.blocklog.database.InventoryTypeConverter;
 import de.pxav.blocklog.database.SerialBlockLocationConverter;
 import org.bukkit.event.inventory.InventoryType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -24,13 +27,19 @@ public class InventorySession {
   @GenericGenerator(name = "increment", strategy = "increment")
   private int id;
 
+  @Type(type = "uuid-char")
   private UUID playerUUID;
+
   private String playerName;
 
   @Convert(converter = SerialBlockLocationConverter.class)
   private SerialBlockLocation blockLocation;
 
+  @Convert(converter = InventoryTypeConverter.class)
   private InventoryType inventoryType;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy="session", orphanRemoval = true)
+  private Set<SessionItem> items;
 
   public InventorySession() {}
 
