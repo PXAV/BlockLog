@@ -1,5 +1,9 @@
 package de.pxav.blocklog;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import de.pxav.blocklog.database.CredentialsFile;
+import de.pxav.blocklog.inject.SimpleBinderModule;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -8,4 +12,25 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author pxav
  */
 public class BlockLog extends JavaPlugin {
+
+  private static Injector injector;
+
+  @Override
+  public void onEnable() {
+    SimpleBinderModule simpleBinderModule = SimpleBinderModule.create(this);
+    injector = Guice.createInjector(simpleBinderModule);
+
+
+
+  }
+
+  @Override
+  public void onDisable() {
+
+  }
+
+  public static Injector getInjector() {
+    return injector;
+  }
+
 }
