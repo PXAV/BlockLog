@@ -1,6 +1,8 @@
 package de.pxav.blocklog.inject;
 
 import com.google.inject.AbstractModule;
+import de.pxav.blocklog.database.InventorySessionRepository;
+import de.pxav.blocklog.database.InventorySessionRepositoryImpl;
 import de.pxav.blocklog.database.SessionFactoryProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.SessionFactory;
@@ -30,6 +32,7 @@ public class SimpleBinderModule extends AbstractModule {
     bind(JavaPlugin.class).toInstance(this.mainClass);
     bind(ExecutorService.class).toInstance(Executors.newCachedThreadPool());
     bind(SessionFactory.class).toProvider(SessionFactoryProvider.class);
+    bind(InventorySessionRepository.class).to(InventorySessionRepositoryImpl.class);
   }
 
 }
