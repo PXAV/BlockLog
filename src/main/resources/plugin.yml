@@ -2,3 +2,4 @@ name: BlockLog
 version: 0.1
 author: pxav
 main: de.pxav.blocklog.BlockLog
+api-version: 1.16
