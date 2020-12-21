@@ -38,7 +38,9 @@ public class CredentialsFile {
 
     if (!file.exists()) {
       try {
-        file.createNewFile();
+        if (file.createNewFile()) {
+          this.writeDefaults();
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }

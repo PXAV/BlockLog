@@ -22,7 +22,6 @@ public class BlockLog extends JavaPlugin {
 
     CredentialsFile credentialsFile = injector.getInstance(CredentialsFile.class);
     credentialsFile.createFile("plugins//BlockLog", "databaseCredentials.yml");
-    credentialsFile.writeDefaults();
     credentialsFile.loadToCache();
 
   }
