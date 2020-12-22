@@ -78,24 +78,19 @@ public class SessionFactoryProvider implements Provider<SessionFactory> {
 
         settings.put(Environment.DRIVER, "org.sqlite.JDBC");
         settings.put(Environment.URL, url);
-        //settings.put(Environment.DIALECT, "org.hibernate.dialect.SQLiteDialect");
         settings.put(Environment.DIALECT, "org.sqlite.hibernate.dialect.SQLiteDialect");
       } else {
         System.out.println("Configuration error: Unknown database type '" + databaseType + "'");
       }
 
       settings.put(Environment.SHOW_SQL, settingsConfig.getBoolean("database.hibernate.show_sql"));
-//      settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-//      settings.put("hibernate.hikari.connectionTimeout", "20000");
-//      settings.put("hibernate.hikari.minimumIdle", "10");
-//      settings.put("hibernate.hikari.idleTimeout", "300000");
-      settings.put(Environment.USE_SECOND_LEVEL_CACHE, "true");
-//      settings.put(Environment.USE_QUERY_CACHE, "true");
+      settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+      settings.put(Environment.USE_QUERY_CACHE, "true");
       settings.put(Environment.CACHE_REGION_FACTORY, "org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory");
-//      settings.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true");
-//      settings.put(Environment.ORDER_INSERTS, true);
-//      settings.put(Environment.ORDER_UPDATES, true);
-
+      settings.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, "true"); // enable automatic transaction for lazy loading
+      settings.put(Environment.ORDER_INSERTS, true);
+      settings.put(Environment.ORDER_UPDATES, true);
+      settings.put(Environment.USE_SQL_COMMENTS, settingsConfig.getBoolean("database.hibernate.use_sql_comments"));
 
       registryBuilder.applySettings(settings);
       registry = registryBuilder.build();

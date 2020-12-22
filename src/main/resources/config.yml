@@ -6,6 +6,7 @@ database:
   hibernate:
     show_sql: true
     show_log: true
+    use_sql_comments: true
 
   sqlite:
     database_name: 'block_log.db'
