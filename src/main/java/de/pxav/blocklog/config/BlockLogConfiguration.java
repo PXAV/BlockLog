@@ -2,6 +2,7 @@ package de.pxav.blocklog.config;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -49,6 +50,7 @@ public abstract class BlockLogConfiguration {
     this.configuration = YamlConfiguration.loadConfiguration(file);
     this.configuration.getKeys(true).forEach(current
             -> cachedValues.put(current, configuration.get(current)));
+    Bukkit.getConsoleSender().sendMessage("Successfully cached all properties for '" + resourcePath() + "'");
   }
 
   public Object getValue(String key) {
