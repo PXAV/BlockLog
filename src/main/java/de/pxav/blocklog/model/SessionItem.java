@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class SessionItem {
 
   @Id
-  @GeneratedValue(generator = "increment")
+  @GeneratedValue(generator = "increment", strategy = GenerationType.IDENTITY)
   @GenericGenerator(name = "increment", strategy = "increment")
   private Integer id = null;
 
@@ -41,6 +41,7 @@ public class SessionItem {
     this.session = session;
     this.material = material;
     this.itemDirection = itemDirection;
+    this.amount = amount;
   }
 
   public Integer getId() {
