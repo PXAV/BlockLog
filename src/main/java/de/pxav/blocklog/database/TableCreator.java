@@ -44,6 +44,13 @@ public class TableCreator {
               ")")
               .executeUpdate();
 
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS session_items (" +
+              "id INT PRIMARY KEY," +
+              "config_key VARCHAR(100)," +
+              "config_value VARCHAR(255)" +
+              ")")
+              .executeUpdate();
+
       transaction.commit();
     }
   }
