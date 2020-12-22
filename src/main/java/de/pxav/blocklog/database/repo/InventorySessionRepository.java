@@ -2,38 +2,59 @@ package de.pxav.blocklog.database.repo;
 
 import de.pxav.blocklog.model.InventorySession;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
-import org.bukkit.entity.Player;
+import org.bukkit.Material;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
-import java.util.Collection;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 
 /**
  * A class description goes here.
  *
  * @author pxav
  */
-public abstract class InventorySessionRepository {
+@Singleton
+public class InventorySessionRepository extends Repository<InventorySession> {
 
-  protected SessionFactory sessionFactory;
+  private ExecutorService executorService;
 
-  public InventorySessionRepository(SessionFactory sessionFactory) {
-    this.sessionFactory = sessionFactory;
+  @Inject
+  public InventorySessionRepository(SessionFactory sessionFactory, ExecutorService executorService) {
+    super(sessionFactory, executorService);
   }
 
-  public abstract InventorySession getById(int id);
+  public InventorySession getById(int id) {
+    try (Session session = sessionFactory.getCurrentSession()) {
+      session.beginTransaction();
+      return (InventorySession) session
+              .createCriteria(InventorySession.class)
+              .add(Restrictions.eq("id", id))
+              .uniqueResult();
+    }
+  }
 
-  public abstract List<InventorySession> getByPlayerUUID(UUID uuid);
+  public List<InventorySession> getByPlayerUUID(UUID uuid) {
+    try (Session session = sessionFactory.getCurrentSession()) {
+      session.beginTransaction();
+      return session.createCriteria(InventorySession.class)
+              .add(Restrictions.eq("playerUUID", uuid))
+              .list();
+    }
+  }
 
-  public abstract List<InventorySession> getByLocation(SerialBlockLocation location);
-
-  public abstract void save(InventorySession session);
-
-  public abstract void delete(InventorySession session);
-
-  public Collection<InventorySession> getByPlayer(Player player) {
-    return getByPlayerUUID(player.getUniqueId());
+  public List<InventorySession> getByLocation(SerialBlockLocation location) {
+    try (Session session = sessionFactory.getCurrentSession()) {
+      session.beginTransaction();
+      return session.createCriteria(InventorySession.class)
+              .add(Restrictions.eq("blockLocation", location))
+              .list();
+    }
   }
 
 }
