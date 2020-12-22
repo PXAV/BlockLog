@@ -37,7 +37,7 @@ public class SessionItem {
 
   public SessionItem() {}
 
-  public SessionItem(InventorySession session, Material material, ItemDirection itemDirection) {
+  public SessionItem(InventorySession session, Material material, int amount, ItemDirection itemDirection) {
     this.session = session;
     this.material = material;
     this.itemDirection = itemDirection;
