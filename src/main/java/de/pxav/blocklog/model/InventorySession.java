@@ -1,5 +1,6 @@
 package de.pxav.blocklog.model;
 
+import com.google.common.collect.Sets;
 import de.pxav.blocklog.database.InventoryTypeConverter;
 import de.pxav.blocklog.database.SerialBlockLocationConverter;
 import org.bukkit.event.inventory.InventoryType;
@@ -23,23 +24,26 @@ import java.util.UUID;
 public class InventorySession {
 
   @Id
-  @GeneratedValue(generator = "increment")
+  @GeneratedValue(generator = "increment", strategy = GenerationType.IDENTITY)
   @GenericGenerator(name = "increment", strategy = "increment")
   private int id;
 
   @Type(type = "uuid-char")
+  @Column(nullable = false)
   private UUID playerUUID;
 
   private String playerName;
 
   @Convert(converter = SerialBlockLocationConverter.class)
+  @Column(nullable = false)
   private SerialBlockLocation blockLocation;
 
   @Convert(converter = InventoryTypeConverter.class)
+  @Column(nullable = false)
   private InventoryType inventoryType;
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy="session", orphanRemoval = true)
-  private Set<SessionItem> items;
+  private Set<SessionItem> items = Sets.newHashSet();
 
   public InventorySession() {}
 
@@ -88,6 +92,14 @@ public class InventorySession {
 
   public void setInventoryType(InventoryType inventoryType) {
     this.inventoryType = inventoryType;
+  }
+
+  public void addItem(SessionItem sessionItem) {
+    this.items.add(sessionItem);
+  }
+
+  public Set<SessionItem> getItems() {
+    return items;
   }
 
 }
