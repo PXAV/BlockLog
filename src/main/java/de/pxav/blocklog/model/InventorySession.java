@@ -1,8 +1,9 @@
 package de.pxav.blocklog.model;
 
 import com.google.common.collect.Sets;
-import de.pxav.blocklog.database.InventoryTypeConverter;
-import de.pxav.blocklog.database.SerialBlockLocationConverter;
+import de.pxav.blocklog.database.converter.InventoryTypeConverter;
+import de.pxav.blocklog.database.converter.SerialBlockLocationConverter;
+import de.pxav.blocklog.model.serial.SerialBlockLocation;
 import org.bukkit.event.inventory.InventoryType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

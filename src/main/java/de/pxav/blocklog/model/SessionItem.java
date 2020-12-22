@@ -1,7 +1,7 @@
 package de.pxav.blocklog.model;
 
-import de.pxav.blocklog.database.ItemDirectionConverter;
-import de.pxav.blocklog.database.MaterialConverter;
+import de.pxav.blocklog.database.converter.ItemDirectionConverter;
+import de.pxav.blocklog.database.converter.MaterialConverter;
 import org.bukkit.Material;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
