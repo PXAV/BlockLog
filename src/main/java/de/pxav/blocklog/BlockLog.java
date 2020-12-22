@@ -28,7 +28,7 @@ public class BlockLog extends JavaPlugin {
 
   @Override
   public void onDisable() {
-
+    injector.getInstance(SessionFactory.class).close();
   }
 
   public static Injector getInjector() {
