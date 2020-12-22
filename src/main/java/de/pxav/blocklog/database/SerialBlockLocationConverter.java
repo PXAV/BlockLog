@@ -16,8 +16,7 @@ public class SerialBlockLocationConverter implements AttributeConverter<SerialBl
     return serialBlockLocation.getWorld()
             + ";" + serialBlockLocation.getX()
             + ";" + serialBlockLocation.getY()
-            + ";" + serialBlockLocation.getZ()
-            + serialBlockLocation.getY() + serialBlockLocation.getZ();
+            + ";" + serialBlockLocation.getZ();
   }
 
   @Override
