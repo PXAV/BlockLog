@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import de.pxav.blocklog.BlockLog;
 import de.pxav.blocklog.config.SettingsConfiguration;
+import de.pxav.blocklog.config.SqlDatabaseCredentialsConfig;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
@@ -33,13 +34,13 @@ public class SessionFactoryProvider implements Provider<SessionFactory> {
 
   private static StandardServiceRegistry registry;
 
-  private final CredentialsFile credentialsFile;
+  private final SqlDatabaseCredentialsConfig sqlConfig;
   private final SettingsConfiguration settingsConfig;
   private SessionFactory sessionFactory;
 
   @Inject
-  public SessionFactoryProvider(CredentialsFile credentialsFile, SettingsConfiguration settingsConfig) {
-    this.credentialsFile = credentialsFile;
+  public SessionFactoryProvider(SqlDatabaseCredentialsConfig sqlConfig, SettingsConfiguration settingsConfig) {
+    this.sqlConfig = sqlConfig;
     this.settingsConfig = settingsConfig;
   }
 
@@ -62,16 +63,16 @@ public class SessionFactoryProvider implements Provider<SessionFactory> {
 
       if (databaseType.equalsIgnoreCase("MY_SQL")) {
         String url = "jdbc:mysql://"
-                + this.credentialsFile.getHost()
+                + this.sqlConfig.getString("host")
                 + ":"
-                + this.credentialsFile.getPort()
+                + this.sqlConfig.getInteger("port")
                 + "/"
-                + this.credentialsFile.getDatabase();
+                + this.sqlConfig.getString("database");
 
         settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
         settings.put(Environment.URL, url);
-        settings.put(Environment.USER, this.credentialsFile.getUsername());
-        settings.put(Environment.PASS, this.credentialsFile.getPassword());
+        settings.put(Environment.USER, this.sqlConfig.getString("username"));
+        settings.put(Environment.PASS, this.sqlConfig.getString("password"));
         settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
       } else if (databaseType.equalsIgnoreCase("SQLITE")) {
         String url = "jdbc:sqlite:" + settingsConfig.getString("database.sqlite.database_name");
