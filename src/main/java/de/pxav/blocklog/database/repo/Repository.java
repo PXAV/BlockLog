@@ -1,9 +1,11 @@
 package de.pxav.blocklog.database.repo;
 
+import de.pxav.blocklog.model.BlacklistedBlock;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -19,6 +21,13 @@ public abstract class Repository<T> {
   public Repository(SessionFactory sessionFactory, ExecutorService executorService) {
     this.sessionFactory = sessionFactory;
     this.executorService = executorService;
+  }
+
+  public List<T> findAll(Class<T> t) {
+    try (Session session = this.sessionFactory.getCurrentSession()) {
+      session.beginTransaction();
+      return (List<T>) session.createCriteria(t).list();
+    }
   }
 
   public void save(T t) {
