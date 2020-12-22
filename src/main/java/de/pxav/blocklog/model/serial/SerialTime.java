@@ -1,11 +1,13 @@
 package de.pxav.blocklog.model.serial;
 
+import java.io.Serializable;
+
 /**
  * A class description goes here.
  *
  * @author pxav
  */
-public class SerialTime {
+public class SerialTime implements Serializable {
 
   private int second;
   private int minute;
