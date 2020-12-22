@@ -1,0 +1,12 @@
+database:
+
+  # MY_SQL | SQLITE
+  database_type: MY_SQL
+
+  hibernate:
+    show_sql: true
+    show_log: true
+
+  sqlite:
+    database_name: 'block_log.db'
+
