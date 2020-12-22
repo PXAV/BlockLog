@@ -1,0 +1,7 @@
+host: localhost
+port: 6379
+use-ssl: false
+use-username: false
+username: 'username'
+use-password: false
+password: 'password'
