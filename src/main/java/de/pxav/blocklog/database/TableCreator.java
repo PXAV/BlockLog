@@ -30,6 +30,8 @@ public class TableCreator {
               "id INT PRIMARY KEY," +
               "playerUUID VARCHAR(50)," +
               "playerName VARCHAR(20)," +
+              "sessionStart VARCHAR(30)," +
+              "sessionEnd VARCHAR(30)," +
               "blockLocation VARCHAR(30)," +
               "inventoryType VARCHAR(30)" +
               ")")

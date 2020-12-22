@@ -3,7 +3,9 @@ package de.pxav.blocklog.model;
 import com.google.common.collect.Sets;
 import de.pxav.blocklog.database.converter.InventoryTypeConverter;
 import de.pxav.blocklog.database.converter.SerialBlockLocationConverter;
+import de.pxav.blocklog.database.converter.SerialTimeConverter;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
+import de.pxav.blocklog.model.serial.SerialTime;
 import org.bukkit.event.inventory.InventoryType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,6 +37,12 @@ public class InventorySession {
 
   private String playerName;
 
+  @Convert(converter = SerialTimeConverter.class)
+  private SerialTime sessionStart;
+
+  @Convert(converter = SerialTimeConverter.class)
+  private SerialTime sessionEnd;
+
   @Convert(converter = SerialBlockLocationConverter.class)
   @Column(nullable = false)
   private SerialBlockLocation blockLocation;
@@ -48,9 +56,19 @@ public class InventorySession {
 
   public InventorySession() {}
 
-  public InventorySession(UUID playerUUID, String playerName, SerialBlockLocation blockLocation, InventoryType inventoryType) {
+  public InventorySession(UUID playerUUID, String playerName, SerialTime sessionStart, SerialBlockLocation blockLocation, InventoryType inventoryType) {
     this.playerUUID = playerUUID;
     this.playerName = playerName;
+    this.sessionStart = sessionStart;
+    this.blockLocation = blockLocation;
+    this.inventoryType = inventoryType;
+  }
+
+  public InventorySession(UUID playerUUID, String playerName, SerialTime sessionStart, SerialTime sessionEnd, SerialBlockLocation blockLocation, InventoryType inventoryType) {
+    this.playerUUID = playerUUID;
+    this.playerName = playerName;
+    this.sessionStart = sessionStart;
+    this.sessionEnd = sessionEnd;
     this.blockLocation = blockLocation;
     this.inventoryType = inventoryType;
   }
@@ -77,6 +95,22 @@ public class InventorySession {
 
   public void setPlayerName(String playerName) {
     this.playerName = playerName;
+  }
+
+  public SerialTime getSessionStart() {
+    return sessionStart;
+  }
+
+  public void setSessionStart(SerialTime sessionStart) {
+    this.sessionStart = sessionStart;
+  }
+
+  public SerialTime getSessionEnd() {
+    return sessionEnd;
+  }
+
+  public void setSessionEnd(SerialTime sessionEnd) {
+    this.sessionEnd = sessionEnd;
   }
 
   public SerialBlockLocation getBlockLocation() {
