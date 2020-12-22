@@ -53,6 +53,23 @@ public class TableCreator {
               ")")
               .executeUpdate();
 
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS blacklisted_blocks (" +
+              "id INT PRIMARY KEY," +
+              "material VARCHAR(30)," +
+              "since VARCHAR(30)" +
+              ")")
+              .executeUpdate();
+
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS item_frame_interactions (" +
+              "id INT PRIMARY KEY," +
+              "playerUUID VARCHAR(50)," +
+              "playerName VARCHAR(20)," +
+              "blockLocation VARCHAR(30)," +
+              "material VARCHAR(30)," +
+              "time VARCHAR(30)" +
+              ")")
+              .executeUpdate();
+
       transaction.commit();
     }
   }
