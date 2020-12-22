@@ -22,7 +22,7 @@ public class TableCreator {
     this.sessionFactory = sessionFactory;
   }
 
-  public void createSessionTable() {
+  public void createTables() {
     try (Session session = this.sessionFactory.openSession()) {
       Transaction transaction = session.beginTransaction();
 
@@ -45,12 +45,6 @@ public class TableCreator {
               .executeUpdate();
 
       transaction.commit();
-    }
-  }
-
-  public void createItemTable() {
-    try (Session session = this.sessionFactory.openSession()) {
-
     }
   }
 
