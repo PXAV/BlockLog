@@ -1,4 +1,4 @@
-package de.pxav.blocklog.model;
+package de.pxav.blocklog.model.serial;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

@@ -1,4 +1,4 @@
-package de.pxav.blocklog.model;
+package de.pxav.blocklog.model.serial;
 
 /**
  * A class description goes here.
