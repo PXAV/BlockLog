@@ -1,8 +1,8 @@
 package de.pxav.blocklog.inject;
 
 import com.google.inject.AbstractModule;
-import de.pxav.blocklog.database.InventorySessionRepository;
-import de.pxav.blocklog.database.InventorySessionRepositoryImpl;
+import de.pxav.blocklog.database.repo.InventorySessionRepository;
+import de.pxav.blocklog.database.repo.InventorySessionRepositoryImpl;
 import de.pxav.blocklog.database.SessionFactoryProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.SessionFactory;

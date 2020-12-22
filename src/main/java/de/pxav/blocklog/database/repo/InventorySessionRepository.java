@@ -1,7 +1,7 @@
-package de.pxav.blocklog.database;
+package de.pxav.blocklog.database.repo;
 
 import de.pxav.blocklog.model.InventorySession;
-import de.pxav.blocklog.model.SerialBlockLocation;
+import de.pxav.blocklog.model.serial.SerialBlockLocation;
 import org.bukkit.entity.Player;
 import org.hibernate.SessionFactory;
 
