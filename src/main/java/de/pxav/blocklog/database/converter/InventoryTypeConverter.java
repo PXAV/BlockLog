@@ -1,4 +1,4 @@
-package de.pxav.blocklog.database;
+package de.pxav.blocklog.database.converter;
 
 import org.bukkit.event.inventory.InventoryType;
 

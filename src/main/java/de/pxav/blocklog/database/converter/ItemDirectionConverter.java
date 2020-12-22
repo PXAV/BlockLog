@@ -1,4 +1,4 @@
-package de.pxav.blocklog.database;
+package de.pxav.blocklog.database.converter;
 
 import de.pxav.blocklog.model.ItemDirection;
 
