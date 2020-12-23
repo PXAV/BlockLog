@@ -1,3 +1,9 @@
+web_interface:
+
+  use_web_interface: false
+
+  enable_redis_communication: false
+
 database:
 
   # MY_SQL | SQLITE

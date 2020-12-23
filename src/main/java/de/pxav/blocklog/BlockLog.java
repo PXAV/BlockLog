@@ -54,8 +54,11 @@ public class BlockLog extends JavaPlugin {
     TableCreator tableCreator = injector.getInstance(TableCreator.class);
     tableCreator.createTables();
 
-    injector.getInstance(RedisConnection.class).connect();
-    injector.getInstance(RedisPubSub.class).listen();
+    boolean redisConnected = injector.getInstance(RedisConnection.class).connect();
+    if (redisConnected) {
+      injector.getInstance(RedisPubSub.class).listen();
+    }
+
 
 //    Bukkit.getScheduler().runTaskLater(this, () -> {
 //      // WITHOUT DASHES!!!!!!!!!!
