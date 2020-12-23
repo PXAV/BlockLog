@@ -36,21 +36,21 @@ public class SessionItemRepository extends Repository<SessionItem> {
   public List<SessionItem> getByMaterial(Material material) {
     try (Session session = sessionFactory.getCurrentSession()) {
       session.beginTransaction();
-      return (List<SessionItem>) session.createCriteria(SessionItem.class).add(Restrictions.eq("material", material)).uniqueResult();
+      return (List<SessionItem>) session.createCriteria(SessionItem.class).add(Restrictions.eq("material", material)).list();
     }
   }
 
   public List<SessionItem> getByItemDirection(ItemDirection itemDirection) {
     try (Session session = sessionFactory.getCurrentSession()) {
       session.beginTransaction();
-      return (List<SessionItem>) session.createCriteria(SessionItem.class).add(Restrictions.eq("itemDirection", itemDirection)).uniqueResult();
+      return (List<SessionItem>) session.createCriteria(SessionItem.class).add(Restrictions.eq("itemDirection", itemDirection)).list();
     }
   }
 
   public List<SessionItem> getByAmount(int amount) {
     try (Session session = sessionFactory.getCurrentSession()) {
       session.beginTransaction();
-      return (List<SessionItem>) session.createCriteria(SessionItem.class).add(Restrictions.eq("amount", amount)).uniqueResult();
+      return (List<SessionItem>) session.createCriteria(SessionItem.class).add(Restrictions.eq("amount", amount)).list();
     }
   }
 
