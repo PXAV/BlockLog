@@ -15,7 +15,7 @@ import javax.persistence.*;
  * @author pxav
  */
 @Entity
-@Table(name = "session_items")
+@Table(name = "bl_session_items")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SessionItem {
 

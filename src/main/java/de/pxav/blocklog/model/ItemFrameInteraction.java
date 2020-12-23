@@ -18,7 +18,7 @@ import java.util.UUID;
  * @author pxav
  */
 @Entity
-@Table(name = "item_frame_interactions")
+@Table(name = "bl_item_frame_interactions")
 public class ItemFrameInteraction {
 
   @Id

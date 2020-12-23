@@ -26,7 +26,7 @@ public class TableCreator {
     try (Session session = this.sessionFactory.openSession()) {
       Transaction transaction = session.beginTransaction();
 
-      session.createSQLQuery("CREATE TABLE IF NOT EXISTS inventory_sessions (" +
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_inventory_sessions (" +
               "id INT PRIMARY KEY," +
               "playerUUID VARCHAR(50)," +
               "playerName VARCHAR(20)," +
@@ -37,7 +37,7 @@ public class TableCreator {
               ")")
               .executeUpdate();
 
-      session.createSQLQuery("CREATE TABLE IF NOT EXISTS session_items (" +
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_session_items (" +
               "id INT PRIMARY KEY," +
               "session_id INT," +
               "material VARCHAR(20)," +
@@ -46,21 +46,21 @@ public class TableCreator {
               ")")
               .executeUpdate();
 
-      session.createSQLQuery("CREATE TABLE IF NOT EXISTS session_items (" +
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_session_items (" +
               "id INT PRIMARY KEY," +
               "config_key VARCHAR(100)," +
               "config_value VARCHAR(255)" +
               ")")
               .executeUpdate();
 
-      session.createSQLQuery("CREATE TABLE IF NOT EXISTS blacklisted_blocks (" +
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_blacklisted_blocks (" +
               "id INT PRIMARY KEY," +
               "material VARCHAR(30)," +
               "since VARCHAR(30)" +
               ")")
               .executeUpdate();
 
-      session.createSQLQuery("CREATE TABLE IF NOT EXISTS item_frame_interactions (" +
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_item_frame_interactions (" +
               "id INT PRIMARY KEY," +
               "playerUUID VARCHAR(50)," +
               "playerName VARCHAR(20)," +

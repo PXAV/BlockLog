@@ -31,9 +31,18 @@ public class BlacklistedBlock {
   @Convert(converter = SerialTimeConverter.class)
   private SerialTime since;
 
-  public BlacklistedBlock(Material material, SerialTime since) {
+  private boolean allowBreaking;
+
+  private boolean allowPlacing;
+
+  private boolean allowInteracting;
+
+  public BlacklistedBlock(Material material, SerialTime since, boolean allowBreaking, boolean allowPlacing, boolean allowInteracting) {
     this.material = material;
     this.since = since;
+    this.allowPlacing = allowPlacing;
+    this.allowBreaking = allowBreaking;
+    this.allowInteracting = allowInteracting;
   }
 
   public Material getMaterial() {
@@ -55,4 +64,41 @@ public class BlacklistedBlock {
   public int getId() {
     return id;
   }
+
+  public boolean breakingAllowed() {
+    return allowBreaking;
+  }
+
+  public void allowBreaking() {
+    this.allowBreaking = true;
+  }
+
+  public void disallowBreaking() {
+    this.allowBreaking = false;
+  }
+
+  public boolean placingAllowed() {
+    return this.allowPlacing;
+  }
+
+  public void allowPlacing() {
+    this.allowPlacing = true;
+  }
+
+  public void disallowPlacing() {
+    this.allowPlacing = false;
+  }
+
+  public boolean interactingAllowed() {
+    return this.allowInteracting;
+  }
+
+  public void allowInteracting() {
+    this.allowInteracting = true;
+  }
+
+  public void disallowInteracting() {
+    this.allowInteracting = false;
+  }
+
 }

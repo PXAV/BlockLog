@@ -22,7 +22,7 @@ import java.util.UUID;
  * @author pxav
  */
 @Entity
-@Table(name = "inventory_sessions")
+@Table(name = "bl_inventory_sessions")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class InventorySession {
 
