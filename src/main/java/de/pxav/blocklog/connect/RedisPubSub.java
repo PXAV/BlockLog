@@ -70,6 +70,8 @@ public class RedisPubSub {
     });
   }
 
+  // receive updateConfig from web to update config file
+
   public void publish(String channel, String message) {
     this.redisConnection.getResponseClient().publish(channel, message);
   }
