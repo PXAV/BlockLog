@@ -56,7 +56,10 @@ public class TableCreator {
       session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_blacklisted_blocks (" +
               "id INT PRIMARY KEY," +
               "material VARCHAR(30)," +
-              "since VARCHAR(30)" +
+              "since VARCHAR(30)," +
+              "allowBreaking VARCHAR(5)," +
+              "allowPlacing VARCHAR(5)," +
+              "allowInteracting VARCHAR(5)" +
               ")")
               .executeUpdate();
 
@@ -69,6 +72,17 @@ public class TableCreator {
               "time VARCHAR(30)" +
               ")")
               .executeUpdate();
+
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_player_block_updates (" +
+              "id INT PRIMARY KEY," +
+              "playerUUID VARCHAR(50)," +
+              "fromMaterial VARCHAR(30)," +
+              "toMaterial VARCHAR(30)," +
+              "serialTime VARCHAR(30)," +
+              "location VARCHAR(30)" +
+              ")")
+              .executeUpdate();
+
 
       transaction.commit();
     }

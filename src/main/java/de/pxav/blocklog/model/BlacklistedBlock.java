@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @author pxav
  */
 @Entity
-@Table(name = "blacklisted_blocks")
+@Table(name = "bl_blacklisted_blocks")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BlacklistedBlock {
 
