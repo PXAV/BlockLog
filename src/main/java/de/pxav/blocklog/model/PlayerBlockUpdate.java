@@ -1,5 +1,6 @@
 package de.pxav.blocklog.model;
 
+import de.pxav.blocklog.database.converter.BlockUpdateTypeConverter;
 import de.pxav.blocklog.database.converter.MaterialConverter;
 import de.pxav.blocklog.database.converter.SerialBlockLocationConverter;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
@@ -43,12 +44,16 @@ public class PlayerBlockUpdate {
   @Convert(converter = SerialBlockLocationConverter.class)
   private SerialBlockLocation location;
 
-  public PlayerBlockUpdate(UUID playerUUID, Material fromMaterial, Material toMaterial, LocalDateTime serialTime, SerialBlockLocation location) {
+  @Convert(converter = BlockUpdateTypeConverter.class)
+  private BlockUpdateType blockUpdateType;
+
+  public PlayerBlockUpdate(UUID playerUUID, Material fromMaterial, Material toMaterial, LocalDateTime serialTime, SerialBlockLocation location, BlockUpdateType blockUpdateType) {
     this.playerUUID = playerUUID;
     this.fromMaterial = fromMaterial;
     this.toMaterial = toMaterial;
     this.serialTime = serialTime;
     this.location = location;
+    this.blockUpdateType = blockUpdateType;
   }
 
   public UUID getPlayerUUID() {
@@ -91,4 +96,11 @@ public class PlayerBlockUpdate {
     this.location = location;
   }
 
+  public BlockUpdateType getBlockUpdateType() {
+    return blockUpdateType;
+  }
+
+  public void setBlockUpdateType(BlockUpdateType blockUpdateType) {
+    this.blockUpdateType = blockUpdateType;
+  }
 }
