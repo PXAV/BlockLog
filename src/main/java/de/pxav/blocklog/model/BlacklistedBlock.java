@@ -1,14 +1,13 @@
 package de.pxav.blocklog.model;
 
 import de.pxav.blocklog.database.converter.MaterialConverter;
-import de.pxav.blocklog.database.converter.SerialTimeConverter;
-import de.pxav.blocklog.model.serial.SerialTime;
 import org.bukkit.Material;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * A class description goes here.
@@ -23,13 +22,15 @@ public class BlacklistedBlock {
   @Id
   @GeneratedValue(generator = "increment", strategy = GenerationType.IDENTITY)
   @GenericGenerator(name = "increment", strategy = "increment")
+  @Column(unique = true, nullable = false)
   private int id;
 
   @Convert(converter = MaterialConverter.class)
+  @Column(unique = true, nullable = false)
   private Material material;
 
-  @Convert(converter = SerialTimeConverter.class)
-  private SerialTime since;
+  //@Convert(converter = DateConverter.class)
+  private LocalDateTime since;
 
   private boolean allowBreaking;
 
@@ -37,7 +38,9 @@ public class BlacklistedBlock {
 
   private boolean allowInteracting;
 
-  public BlacklistedBlock(Material material, SerialTime since, boolean allowBreaking, boolean allowPlacing, boolean allowInteracting) {
+  public BlacklistedBlock() {}
+
+  public BlacklistedBlock(Material material, LocalDateTime since, boolean allowBreaking, boolean allowPlacing, boolean allowInteracting) {
     this.material = material;
     this.since = since;
     this.allowPlacing = allowPlacing;
@@ -53,11 +56,11 @@ public class BlacklistedBlock {
     this.material = material;
   }
 
-  public SerialTime getSince() {
+  public LocalDateTime getSince() {
     return since;
   }
 
-  public void setSince(SerialTime since) {
+  public void setSince(LocalDateTime since) {
     this.since = since;
   }
 

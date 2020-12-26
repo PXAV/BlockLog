@@ -1,11 +1,8 @@
 package de.pxav.blocklog.model;
 
-import de.pxav.blocklog.database.converter.DateConverter;
 import de.pxav.blocklog.database.converter.MaterialConverter;
 import de.pxav.blocklog.database.converter.SerialBlockLocationConverter;
-import de.pxav.blocklog.database.converter.SerialTimeConverter;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
-import de.pxav.blocklog.model.serial.SerialTime;
 import org.bukkit.Material;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -14,7 +11,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**

@@ -30,8 +30,8 @@ public class TableCreator {
               "id INT PRIMARY KEY," +
               "playerUUID VARCHAR(50)," +
               "playerName VARCHAR(20)," +
-              "sessionStart VARCHAR(30)," +
-              "sessionEnd VARCHAR(30)," +
+              "sessionStart TIMESTAMP," +
+              "sessionEnd TIMESTAMP," +
               "blockLocation VARCHAR(30)," +
               "inventoryType VARCHAR(30)" +
               ")")
@@ -46,7 +46,7 @@ public class TableCreator {
               ")")
               .executeUpdate();
 
-      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_session_items (" +
+      session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_configuration (" +
               "id INT PRIMARY KEY," +
               "config_key VARCHAR(100)," +
               "config_value VARCHAR(255)" +
@@ -56,7 +56,7 @@ public class TableCreator {
       session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_blacklisted_blocks (" +
               "id INT PRIMARY KEY," +
               "material VARCHAR(30)," +
-              "since VARCHAR(30)," +
+              "since TIMESTAMP," +
               "allowBreaking VARCHAR(5)," +
               "allowPlacing VARCHAR(5)," +
               "allowInteracting VARCHAR(5)" +
@@ -69,7 +69,7 @@ public class TableCreator {
               "playerName VARCHAR(20)," +
               "blockLocation VARCHAR(30)," +
               "material VARCHAR(30)," +
-              "time VARCHAR(30)" +
+              "time TIMESTAMP" +
               ")")
               .executeUpdate();
 
@@ -78,7 +78,7 @@ public class TableCreator {
               "playerUUID VARCHAR(50)," +
               "fromMaterial VARCHAR(30)," +
               "toMaterial VARCHAR(30)," +
-              "serialTime VARCHAR(30)," +
+              "serialTime TIMESTAMP," +
               "location VARCHAR(30)" +
               ")")
               .executeUpdate();

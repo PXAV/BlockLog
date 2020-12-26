@@ -1,7 +1,6 @@
 package de.pxav.blocklog.database.repo;
 
 import de.pxav.blocklog.model.BlacklistedBlock;
-import de.pxav.blocklog.model.serial.SerialTime;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.hibernate.Session;
@@ -11,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -40,7 +40,7 @@ public class BlacklistedBlockRepository extends Repository<BlacklistedBlock> {
     }
   }
 
-  public BlacklistedBlock getByMaterial(SerialTime since) {
+  public BlacklistedBlock getByTimeAdded(LocalDateTime since) {
     try (Session session = sessionFactory.getCurrentSession()) {
       session.beginTransaction();
       return (BlacklistedBlock) session.createCriteria(BlacklistedBlock.class).add(Restrictions.eq("since", since)).uniqueResult();

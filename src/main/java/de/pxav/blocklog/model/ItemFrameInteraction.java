@@ -2,14 +2,13 @@ package de.pxav.blocklog.model;
 
 import de.pxav.blocklog.database.converter.MaterialConverter;
 import de.pxav.blocklog.database.converter.SerialBlockLocationConverter;
-import de.pxav.blocklog.database.converter.SerialTimeConverter;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
-import de.pxav.blocklog.model.serial.SerialTime;
 import org.bukkit.Material;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -38,10 +37,9 @@ public class ItemFrameInteraction {
   @Convert(converter = MaterialConverter.class)
   private Material material;
 
-  @Convert(converter = SerialTimeConverter.class)
-  private SerialTime time;
+  private LocalDateTime time;
 
-  public ItemFrameInteraction(UUID playerUUID, String playerName, SerialBlockLocation blockLocation, Material material, SerialTime time) {
+  public ItemFrameInteraction(UUID playerUUID, String playerName, SerialBlockLocation blockLocation, Material material, LocalDateTime time) {
     this.playerUUID = playerUUID;
     this.playerName = playerName;
     this.blockLocation = blockLocation;
@@ -89,11 +87,11 @@ public class ItemFrameInteraction {
     this.material = material;
   }
 
-  public SerialTime getTime() {
+  public LocalDateTime getTime() {
     return time;
   }
 
-  public void setTime(SerialTime time) {
+  public void setTime(LocalDateTime time) {
     this.time = time;
   }
 

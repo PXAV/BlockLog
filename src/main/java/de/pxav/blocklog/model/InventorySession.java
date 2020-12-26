@@ -3,9 +3,7 @@ package de.pxav.blocklog.model;
 import com.google.common.collect.Sets;
 import de.pxav.blocklog.database.converter.InventoryTypeConverter;
 import de.pxav.blocklog.database.converter.SerialBlockLocationConverter;
-import de.pxav.blocklog.database.converter.SerialTimeConverter;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
-import de.pxav.blocklog.model.serial.SerialTime;
 import org.bukkit.event.inventory.InventoryType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -13,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -37,11 +36,9 @@ public class InventorySession {
 
   private String playerName;
 
-  @Convert(converter = SerialTimeConverter.class)
-  private SerialTime sessionStart;
+  private LocalDateTime sessionStart;
 
-  @Convert(converter = SerialTimeConverter.class)
-  private SerialTime sessionEnd;
+  private LocalDateTime sessionEnd;
 
   @Convert(converter = SerialBlockLocationConverter.class)
   @Column(nullable = false)
@@ -56,7 +53,7 @@ public class InventorySession {
 
   public InventorySession() {}
 
-  public InventorySession(UUID playerUUID, String playerName, SerialTime sessionStart, SerialBlockLocation blockLocation, InventoryType inventoryType) {
+  public InventorySession(UUID playerUUID, String playerName, LocalDateTime sessionStart, SerialBlockLocation blockLocation, InventoryType inventoryType) {
     this.playerUUID = playerUUID;
     this.playerName = playerName;
     this.sessionStart = sessionStart;
@@ -64,7 +61,7 @@ public class InventorySession {
     this.inventoryType = inventoryType;
   }
 
-  public InventorySession(UUID playerUUID, String playerName, SerialTime sessionStart, SerialTime sessionEnd, SerialBlockLocation blockLocation, InventoryType inventoryType) {
+  public InventorySession(UUID playerUUID, String playerName, LocalDateTime sessionStart, LocalDateTime sessionEnd, SerialBlockLocation blockLocation, InventoryType inventoryType) {
     this.playerUUID = playerUUID;
     this.playerName = playerName;
     this.sessionStart = sessionStart;
@@ -97,19 +94,19 @@ public class InventorySession {
     this.playerName = playerName;
   }
 
-  public SerialTime getSessionStart() {
+  public LocalDateTime getSessionStart() {
     return sessionStart;
   }
 
-  public void setSessionStart(SerialTime sessionStart) {
+  public void setSessionStart(LocalDateTime sessionStart) {
     this.sessionStart = sessionStart;
   }
 
-  public SerialTime getSessionEnd() {
+  public LocalDateTime getSessionEnd() {
     return sessionEnd;
   }
 
-  public void setSessionEnd(SerialTime sessionEnd) {
+  public void setSessionEnd(LocalDateTime sessionEnd) {
     this.sessionEnd = sessionEnd;
   }
 
