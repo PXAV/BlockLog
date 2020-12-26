@@ -10,6 +10,7 @@ import de.pxav.blocklog.database.repo.BlacklistedBlockRepository;
 import de.pxav.blocklog.database.repo.InventorySessionRepository;
 import de.pxav.blocklog.database.repo.ItemFrameInteractionRepository;
 import de.pxav.blocklog.inject.SimpleBinderModule;
+import de.pxav.blocklog.listener.EventHandlerRegistration;
 import de.pxav.blocklog.model.*;
 import de.pxav.blocklog.model.serial.SerialBlockLocation;
 import de.pxav.blocklog.model.serial.SerialTime;
@@ -58,6 +59,8 @@ public class BlockLog extends JavaPlugin {
     if (redisConnected) {
       injector.getInstance(RedisPubSub.class).listen();
     }
+
+    injector.getInstance(EventHandlerRegistration.class).registerAllListeners(this.getClass().getPackage().getName());
 
 
 //    Bukkit.getScheduler().runTaskLater(this, () -> {
