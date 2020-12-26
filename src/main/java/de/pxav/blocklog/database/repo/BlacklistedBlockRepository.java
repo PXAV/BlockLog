@@ -2,9 +2,11 @@ package de.pxav.blocklog.database.repo;
 
 import de.pxav.blocklog.model.BlacklistedBlock;
 import de.pxav.blocklog.model.serial.SerialTime;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import javax.inject.Inject;
@@ -45,4 +47,20 @@ public class BlacklistedBlockRepository extends Repository<BlacklistedBlock> {
     }
   }
 
+  @Override
+  public void save(BlacklistedBlock blacklistedBlock) {
+    executorService.execute(() -> {
+      try (Session session = this.sessionFactory.openSession()) {
+        Transaction transaction = session.beginTransaction();
+
+        BlacklistedBlock block = (BlacklistedBlock) session.createCriteria(BlacklistedBlock.class).add(Restrictions.eq("material", blacklistedBlock.getMaterial())).uniqueResult();
+        if (block == null) {
+          session.saveOrUpdate(blacklistedBlock);
+          transaction.commit();
+        } else {
+          Bukkit.getConsoleSender().sendMessage("Found duplicate entry for blacklisted block '" + blacklistedBlock.getMaterial() + "'. Skipping new insert.");
+        }
+      }
+    });
+  }
 }
