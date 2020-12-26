@@ -80,7 +80,7 @@ public class TableCreator {
               "toMaterial VARCHAR(30)," +
               "serialTime TIMESTAMP," +
               "location VARCHAR(30)," +
-              "blockUpdateType VARCHAR(10)" +
+              "blockUpdateType VARCHAR(20)" +
               ")")
               .executeUpdate();
 
