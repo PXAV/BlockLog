@@ -51,7 +51,7 @@ public class BlockBreakListener implements Listener {
     if ((blacklistedBlock != null && !blacklistedBlock.breakingAllowed()) || event.isCancelled()) {
       event.setCancelled(true);
       Material material = event.getBlock().getLocation().getWorld().getBlockAt(event.getBlock().getLocation()).getType();
-      blockUpdate.setBlockUpdateType(BlockUpdateType.BLOCKED);
+      blockUpdate.setBlockUpdateType(BlockUpdateType.BLOCKED_BREAK);
       blockUpdate.setFromMaterial(material);
     }
 

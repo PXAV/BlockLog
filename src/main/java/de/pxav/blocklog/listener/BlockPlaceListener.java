@@ -50,7 +50,7 @@ public class BlockPlaceListener implements Listener {
     if ((blacklistedBlock != null && !blacklistedBlock.placingAllowed()) || event.isCancelled()) {
       event.setCancelled(true);
       blockUpdate.setToMaterial(event.getBlockReplacedState().getBlock().getType());
-      blockUpdate.setBlockUpdateType(BlockUpdateType.BLOCKED);
+      blockUpdate.setBlockUpdateType(BlockUpdateType.BLOCKED_PLACE);
     }
 
     blockUpdateRepository.save(blockUpdate);
