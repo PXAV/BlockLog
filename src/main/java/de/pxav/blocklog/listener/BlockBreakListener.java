@@ -39,21 +39,22 @@ public class BlockBreakListener implements Listener {
     Player player = event.getPlayer();
     BlacklistedBlock blacklistedBlock = blockRepository.getByMaterial(event.getBlock().getType());
 
-    if (blacklistedBlock == null || blacklistedBlock.breakingAllowed()) {
-      return;
-    }
-
-    event.setCancelled(true);
-
-    Material material = event.getBlock().getLocation().getWorld().getBlockAt(event.getBlock().getLocation()).getType();
     PlayerBlockUpdate blockUpdate = new PlayerBlockUpdate(
             player.getUniqueId(),
-            material,
-            material,
+            event.getBlock().getType(),
+            Material.AIR,
             LocalDateTime.now(),
             new SerialBlockLocation(event.getBlock().getLocation()),
-            BlockUpdateType.BLOCKED
+            BlockUpdateType.BREAK
     );
+
+    if ((blacklistedBlock != null && !blacklistedBlock.breakingAllowed()) || event.isCancelled()) {
+      event.setCancelled(true);
+      Material material = event.getBlock().getLocation().getWorld().getBlockAt(event.getBlock().getLocation()).getType();
+      blockUpdate.setBlockUpdateType(BlockUpdateType.BLOCKED);
+      blockUpdate.setFromMaterial(material);
+    }
+
     blockUpdateRepository.save(blockUpdate);
 
   }
