@@ -10,7 +10,8 @@ public enum BlockUpdateType {
   BREAK,
   PLACE,
   REPLACE,
+  BLOCKED_REPLACE,
   BLOCKED_PLACE,
-  BLOCKED_BREAK;
+  BLOCKED_BREAK,
 
 }

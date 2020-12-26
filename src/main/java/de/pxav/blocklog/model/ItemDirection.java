@@ -8,6 +8,9 @@ package de.pxav.blocklog.model;
 public enum ItemDirection {
 
   TO_SELF,
-  TO_INVENTORY
+  BLOCKED_TO_SELF,
+  TO_ENTITY,
+  ROTATE,
+  BLOCKED_ROTATE
 
 }
