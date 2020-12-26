@@ -29,21 +29,21 @@ public class ItemFrameInteraction {
   @Column(nullable = false)
   private UUID playerUUID;
 
-  private String playerName;
-
   @Convert(converter = SerialBlockLocationConverter.class)
   private SerialBlockLocation blockLocation;
 
   @Convert(converter = MaterialConverter.class)
   private Material material;
 
+  private ItemDirection action;
+
   private LocalDateTime time;
 
-  public ItemFrameInteraction(UUID playerUUID, String playerName, SerialBlockLocation blockLocation, Material material, LocalDateTime time) {
+  public ItemFrameInteraction(UUID playerUUID, SerialBlockLocation blockLocation, Material material, ItemDirection action, LocalDateTime time) {
     this.playerUUID = playerUUID;
-    this.playerName = playerName;
     this.blockLocation = blockLocation;
     this.material = material;
+    this.action = action;
     this.time = time;
   }
 
@@ -63,14 +63,6 @@ public class ItemFrameInteraction {
     this.playerUUID = playerUUID;
   }
 
-  public String getPlayerName() {
-    return playerName;
-  }
-
-  public void setPlayerName(String playerName) {
-    this.playerName = playerName;
-  }
-
   public SerialBlockLocation getBlockLocation() {
     return blockLocation;
   }
@@ -85,6 +77,14 @@ public class ItemFrameInteraction {
 
   public void setMaterial(Material material) {
     this.material = material;
+  }
+
+  public ItemDirection getAction() {
+    return action;
+  }
+
+  public void setAction(ItemDirection action) {
+    this.action = action;
   }
 
   public LocalDateTime getTime() {

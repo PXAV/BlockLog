@@ -66,9 +66,9 @@ public class TableCreator {
       session.createSQLQuery("CREATE TABLE IF NOT EXISTS bl_item_frame_interactions (" +
               "id INT PRIMARY KEY," +
               "playerUUID VARCHAR(50)," +
-              "playerName VARCHAR(20)," +
               "blockLocation VARCHAR(30)," +
               "material VARCHAR(30)," +
+              "action VARCHAR(30)," +
               "time TIMESTAMP" +
               ")")
               .executeUpdate();
