@@ -1,7 +1,9 @@
 package de.pxav.blocklog.connect;
 
+import de.pxav.blocklog.connect.packet.in.GetBlocksPacket;
 import de.pxav.blocklog.connect.packet.in.IncomingPacket;
 import de.pxav.blocklog.connect.packet.in.CheckPermissionPacket;
+import org.bukkit.Material;
 import redis.clients.jedis.JedisPubSub;
 
 import javax.inject.Inject;
@@ -44,6 +46,15 @@ public class RedisPubSub {
                   System.out.println("ARG " + arg);
                 }
                 IncomingPacket packet = new CheckPermissionPacket(UUID.fromString(args[0]), args[1]);
+                packet.handleIncomingPacket();
+                String response = packet.respond();
+                if (response != null) {
+                  publish("ask_pl_resp", response);
+                }
+              }
+
+              if (message.startsWith("getBlocks")) {
+                IncomingPacket packet = new GetBlocksPacket();
                 packet.handleIncomingPacket();
                 String response = packet.respond();
                 if (response != null) {
